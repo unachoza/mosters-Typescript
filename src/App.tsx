@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface monsters {
+  name: string;
+  key: string
+}
+interface State {
+  monstersObj: monsters[];
+  search: string
+}
+interface Props {
+
+}
+class App extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      monstersObj: [],
+      search: ""
+    }
+  }
+     async componentDidMount?(): Promise<any> {
+      let result: Response = await fetch("http://jsonplaceholder.typicode.com/users")
+      let users = await result.json()
+      this.setState({monstersObj:users})
+   
+
+  }
+  
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">Typscript</header>
+      </div>
+    );
+  }
 }
 
 export default App;
